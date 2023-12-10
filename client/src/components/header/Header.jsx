@@ -6,13 +6,13 @@ export default function Header () {
     return(
         <header className={styles.header}>
             <h1><Link className={styles.home} to="/">Pets World</Link></h1>
-            <nav>
-                <Link to="/games">Catalog</Link>
-                <Link to="/games/create">Add Post</Link>
-                <Link to="/logout">Logout</Link>
+            <nav className={styles.nav}>
+                <Link to="/games" className={styles.link} >Catalog</Link>
+                <Link to="/games/create" className={styles.link} >Add Post</Link>
+                <Link to="/logout" className={styles.link} >Logout</Link>
 
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
+                <Link to="/login" className={styles.link} >Login</Link>
+                <Link to="/register" className={styles.link} >Register</Link>
             </nav>
         </header>
     );

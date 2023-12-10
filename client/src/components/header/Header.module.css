@@ -2,12 +2,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: lightblue;
+    background-image: url("https://people.com/thmb/9sKHZrCCJdaKjl-zutpBojReq04=/1024x256/filters:no_upscale():max_bytes(150000):strip_icc()/Pets-2-441973cd10f34ff392a8cf64edb96ae6.png");
     margin: 0px;
-    
+    padding: 2.5vh;
 }
 
 .header .home{
     text-decoration: none;
+    color: darkcyan;
+    margin-left: 30px;
+    font-size: 50px;
+}
 
+.nav .link{
+    text-decoration: none;
+    color: darkblue;
+    font-size: 30px;
+    font-weight: 700;
+    margin-right: 20px;
 }
