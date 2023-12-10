@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightblue;
+    margin: 0px;
+    
+}
+
+.header .home{
+    text-decoration: none;
+
+}
