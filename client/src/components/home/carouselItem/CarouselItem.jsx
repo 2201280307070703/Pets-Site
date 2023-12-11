@@ -2,7 +2,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 import styles from './CarouselItem.module.css';
 
-export default function CarouselItem () {
+export default function CarouselItem() {
     return(
         <div className={styles.container}>
             <img className={styles.image} src="https://i.cbc.ca/1.5077459.1553886010!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_940/pets.jpg" alt="nz" />
