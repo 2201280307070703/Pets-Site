@@ -5,6 +5,7 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Catalog from "./components/catalog/Catalog";
+import PostCreate from './components/post-create/PostCreate';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       < Routes>
           <Route path = "/" element = {<Home/>}></Route>
           <Route path='/catalog' element = {<Catalog/>}></Route>
+          <Route path='/post/create' element = {<PostCreate/>}></Route>
       </Routes>
       <Footer />
     </>
