@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Catalog from "./components/catalog/Catalog";
 import PostCreate from './components/post-create/PostCreate';
+import Login from './components/login/Login';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path = "/" element = {<Home/>}></Route>
           <Route path='/catalog' element = {<Catalog/>}></Route>
           <Route path='/post/create' element = {<PostCreate/>}></Route>
+          <Route path='/login' element = {<Login/>}></Route>
       </Routes>
       <Footer />
     </>
