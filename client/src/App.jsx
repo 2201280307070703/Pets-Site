@@ -9,6 +9,7 @@ import PostCreate from './components/post-create/PostCreate';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PostDetails from './components/post-details/PostDetails';
+import PostEdit from './components/post-edit/PostEdit';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/login' element = {<Login/>}></Route>
           <Route path = '/register' element = {<Register/>}></Route>
           <Route path = '/posts/:postId' element = {<PostDetails/>}></Route>
+          <Route path='/posts/:postId/edit' element = {<PostEdit/>}></Route>
       </Routes>
       <Footer />
     </>
