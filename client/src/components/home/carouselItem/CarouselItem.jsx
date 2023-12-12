@@ -7,6 +7,7 @@ export default function CarouselItem() {
         <div className={styles.container}>
             <img className={styles.image} src="https://i.cbc.ca/1.5077459.1553886010!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_940/pets.jpg" alt="nz" />
             <Carousel.Caption>
+                <input className={styles.detailsBtn} type="submit" value="Details" />
                 <h3 className={styles.header}>First slide label</h3>
                 <p className={styles.description}>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption>
