@@ -1,0 +1,53 @@
+.container{
+    height: 83vh;
+    background-color:seagreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deleteBtn{
+    margin-right: 10px;
+    background-color: red;
+    border: red;
+    border-radius: 24px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.editBtn{
+    margin-right: 10px;
+    background-color:seagreen;
+    border:seagreen;     
+    margin-right: 10px;
+    border-radius: 24px;
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.editBtn:hover{
+    background-color: lightgreen;
+    color: black;
+}
+
+.deleteBtn:hover{
+    background-color: lightsalmon;
+    color: black;
+}
+
+.name{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.breed{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.description{
+    font-size: 17px;
+}

@@ -12,7 +12,6 @@ export default function Register() {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="maria@email.com"
                 />
                  <br />   
 

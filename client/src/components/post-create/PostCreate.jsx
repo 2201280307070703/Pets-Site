@@ -10,7 +10,7 @@ export default function PostCreate() {
                 <input type="text"  name="name" placeholder="Enter pet name..." />
                 <br/>
 
-                <input type="text"  name="category" placeholder="Enter pet category..." />
+                <input type="text"  name="category" placeholder="Enter pet breed..." />
                 <br/>
 
                 <input type="text"  name="age" placeholder="Enter pet age..." />

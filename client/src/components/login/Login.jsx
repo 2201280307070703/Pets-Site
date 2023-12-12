@@ -13,7 +13,6 @@ export default function Login() {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="Sokka@gmail.com"
                 />
                 <br/>
     
