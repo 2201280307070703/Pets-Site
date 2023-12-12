@@ -5,7 +5,7 @@ export default function Login() {
         <section className={styles.container}>
         <form className={styles.form}>
     
-            <div>
+            <div className={styles.formContainer}>
                 <h1 className={styles.header}>Login</h1>
 
                 <label htmlFor="email">Email:</label>

@@ -11,7 +11,7 @@ export default function CartItem() {
                     Some quick example text to build on the card title and make up the
                     bulk of the card's content.
                 </Card.Text>
-                <Button style={{background: '#ff6555', fontSize:'18px', fontWeight: '600'}}>Details</Button>
+                <Button style={{background: '#ff6555', fontSize:'18px', fontWeight: '600', border: '#ff6555'}}>Details</Button>
             </Card.Body>
         </Card>
     );
