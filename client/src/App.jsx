@@ -1,5 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes, Route} from 'react-router-dom';
+
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import { useState } from 'react';
+
+import * as authService from './services/authService';
+import AuthContext from './contexts/authContext';
+import Path from './path';
 
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -10,28 +16,37 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PostDetails from './components/post-details/PostDetails';
 import PostEdit from './components/post-edit/PostEdit';
-import { useState } from 'react';
-import AuthContext from './contexts/authContext';
 
 function App() {
 const [auth, setAuth] = useState({});
+const navigate = useNavigate();
 
-const loginSubmitHandler = (formValues) => {
-  console.log(formValues);
+const loginSubmitHandler = async ({email, password}) => {
+    const result = await authService.login(email, password);
+
+    setAuth({
+      accessToken: result.accessToken,
+      email: result.email,
+      _id: result._id
+    });
+
+    navigate(Path.Home);
+
 };
+
 
   return (
     <AuthContext.Provider value = {{loginSubmitHandler}}>
     <>
       < Header />
       < Routes>
-          <Route path = "/" element = {<Home/>}></Route>
-          <Route path='/catalog' element = {<Catalog/>}></Route>
-          <Route path='/post/create' element = {<PostCreate/>}></Route>
-          <Route path='/login' element = {<Login/>}></Route>
-          <Route path = '/register' element = {<Register/>}></Route>
-          <Route path = '/posts/:postId' element = {<PostDetails/>}></Route>
-          <Route path='/posts/:postId/edit' element = {<PostEdit/>}></Route>
+          <Route path = {Path.Home} element = {<Home/>}></Route>
+          <Route path={Path.Catalog} element = {<Catalog/>}></Route>
+          <Route path={Path.PostCreate} element = {<PostCreate/>}></Route>
+          <Route path = {Path.PostDetails} element = {<PostDetails/>}></Route>
+          <Route path={Path.PostEdit} element = {<PostEdit/>}></Route>
+          <Route path={Path.Login} element = {<Login/>}></Route>
+          <Route path = {Path.Register} element = {<Register/>}></Route>
       </Routes>
       <Footer />
     </>
