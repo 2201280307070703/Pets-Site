@@ -2,10 +2,17 @@ import styles from './Login.module.css';
 
 import useForm from '../../hooks/useForm';
 
-export default function Login() {
-    const {formValues, onChange, onSubmit} = useForm({
-        email: '',
-        password: ''
+const LoginFormKeys = {
+    Email: 'email',
+    Password: 'password'
+};
+
+export default function Login({
+    loginSubmitHandler
+}) {
+    const {formValues, onChange, onSubmit} = useForm(loginSubmitHandler, {
+        [LoginFormKeys.Email]: '',
+        [LoginFormKeys.Password]: ''
     });
 
     return(
@@ -18,20 +25,18 @@ export default function Login() {
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"
-                    id="email"
-                    name="email"
-                    onChange={onchange}
-                    value={formValues.email}
+                    name={LoginFormKeys.Email}
+                    onChange={onChange}
+                    value={formValues[LoginFormKeys.Email]}
                 />
                 <br/>
     
                 <label htmlFor="login-pass">Password:</label>
                 <input
                     type="password"
-                    id="login-password"
-                    name="password"
-                    onChange={onchange}
-                    value={formValues.password}
+                    name={LoginFormKeys.Password}
+                    onChange={onChange}
+                    value={formValues[LoginFormKeys.Password]}
                 />
                 <br/>
                 <input type="submit" className={styles.submitBtn} value="Login" />
