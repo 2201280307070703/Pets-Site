@@ -16,9 +16,13 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PostDetails from './components/post-details/PostDetails';
 import PostEdit from './components/post-edit/PostEdit';
+import Logout from './components/logout/Logout';
 
 function App() {
-const [auth, setAuth] = useState({});
+const [auth, setAuth] = useState(() => {
+    localStorage.removeItem('accessToken');
+    return {};
+});
 const navigate = useNavigate();
 
 const loginSubmitHandler = async ({email, password}) => {
@@ -30,17 +34,40 @@ const loginSubmitHandler = async ({email, password}) => {
       _id: result._id
     });
 
+    localStorage.setItem('accessToken', result.accessToken);
+
     navigate(Path.Home);
 
 };
 
-const registerSubmitHandler = async(formValues) => {
-    console.log(formValues);
+const registerSubmitHandler = async ({email, password, confirmPassword}) => {
+    if(password !== confirmPassword){
+      throw new Error('Password missmatch!');
+    }
+
+    const result = await authService.register(email, password);
+
+    setAuth({
+      accessToken: result.accessToken,
+      email: result.email,
+      _id: result._id
+    });
+
+    localStorage.setItem('accessToken', result.accessToken);
+
+    navigate(Path.Home);
+};
+
+const logoutHandler = () => {
+    setAuth({});
+
+    localStorage.removeItem('accessToken');
 };
 
 const values ={
   loginSubmitHandler,
   registerSubmitHandler,
+  logoutHandler,
   email: auth.email,
   _id: auth._id,
   isAuthenticated: !!auth.accessToken
@@ -58,6 +85,7 @@ const values ={
           <Route path={Path.PostEdit} element = {<PostEdit/>}></Route>
           <Route path={Path.Login} element = {<Login/>}></Route>
           <Route path = {Path.Register} element = {<Register/>}></Route>
+          <Route path = {Path.Logout} element = {<Logout/>}></Route>
       </Routes>
       <Footer />
     </>

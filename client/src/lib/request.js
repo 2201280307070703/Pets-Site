@@ -8,6 +8,15 @@ const buildOptions = (data) => {
         };
     }
 
+    const accessToken = localStorage.getItem('accessToken');
+
+    if(accessToken){
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': accessToken
+        };
+    };
+
     return options;
 }
 
