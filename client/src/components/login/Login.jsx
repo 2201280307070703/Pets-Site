@@ -1,9 +1,16 @@
 import styles from './Login.module.css';
 
+import useForm from '../../hooks/useForm';
+
 export default function Login() {
+    const {formValues, onChange, onSubmit} = useForm({
+        email: '',
+        password: ''
+    });
+
     return(
         <section className={styles.container}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit}>
     
             <div className={styles.formContainer}>
                 <h1 className={styles.header}>Login</h1>
@@ -13,6 +20,8 @@ export default function Login() {
                     type="email"
                     id="email"
                     name="email"
+                    onChange={onchange}
+                    value={formValues.email}
                 />
                 <br/>
     
@@ -21,6 +30,8 @@ export default function Login() {
                     type="password"
                     id="login-password"
                     name="password"
+                    onChange={onchange}
+                    value={formValues.password}
                 />
                 <br/>
                 <input type="submit" className={styles.submitBtn} value="Login" />
