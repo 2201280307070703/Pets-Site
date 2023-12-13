@@ -1,18 +1,33 @@
-import { Link } from 'react-router-dom';
-
 import styles from './Header.module.css';
 
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+
+import AuthContext from '../../contexts/authContext';
+import Path from '../../path';
+
 export default function Header() {
+    const {email, isAuthenticated} = useContext(AuthContext);
+
     return(
         <header className={styles.header}>
-            <h1><Link className={styles.home} to="/">Pets World</Link></h1>
+            <h1><Link className={styles.home} to={Path.Home}>Pets World</Link></h1>
             <nav className={styles.nav}>
-                <Link to="/catalog" className={styles.link} >Catalog</Link>
-                <Link to="/post/create" className={styles.link} >Add Post</Link>
-                <Link to="/logout" className={styles.link} >Logout</Link>
+                {isAuthenticated && (
+                    <>
+                    <Link to={Path.PostCreate} className={styles.link} >Add Post</Link>
+                    <Link to={Path.Logout} className={styles.link} >Logout</Link>
+                    {/* <p>{email}</p> */}
+                    </>
+                )}
+                <Link to={Path.Catalog} className={styles.link} >Catalog</Link>
 
-                <Link to="/login" className={styles.link} >Login</Link>
-                <Link to="/register" className={styles.link} >Register</Link>
+                {!isAuthenticated && (
+                    <>
+                    <Link to={Path.Login} className={styles.link} >Login</Link>
+                    <Link to={Path.Register} className={styles.link} >Register</Link>
+                    </>
+                )}
             </nav>
         </header>
     );

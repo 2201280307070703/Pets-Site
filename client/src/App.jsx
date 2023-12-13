@@ -34,9 +34,15 @@ const loginSubmitHandler = async ({email, password}) => {
 
 };
 
+const values ={
+  loginSubmitHandler,
+  email: auth.email,
+  _id: auth._id,
+  isAuthenticated: !!auth.accessToken
+};
 
   return (
-    <AuthContext.Provider value = {{loginSubmitHandler}}>
+    <AuthContext.Provider value = {values}>
     <>
       < Header />
       < Routes>

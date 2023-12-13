@@ -5,7 +5,8 @@ const Path = {
     PostDetails: '/posts/:postId',
     PostEdit: '/posts/:postId/edit',
     Login: '/login',
-    Register: '/register'
+    Register: '/register',
+    Logout: '/logout'
 };
 
 export default Path;
