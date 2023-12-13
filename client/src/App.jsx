@@ -34,8 +34,13 @@ const loginSubmitHandler = async ({email, password}) => {
 
 };
 
+const registerSubmitHandler = async(formValues) => {
+    console.log(formValues);
+};
+
 const values ={
   loginSubmitHandler,
+  registerSubmitHandler,
   email: auth.email,
   _id: auth._id,
   isAuthenticated: !!auth.accessToken
