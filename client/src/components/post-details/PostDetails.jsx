@@ -2,15 +2,14 @@ import styles from './PostDetails.module.css';
 
 import { useParams, Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import * as postsService from '../../services/postService';
 import Path from '../../path';
 import { pathToUrl } from '../../utils/pathToUrl';
+import AuthContext from '../../contexts/authContext';
 
 import { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../contexts/authContext';
 
 export default function PostDetails() {
     const { postId }  = useParams();

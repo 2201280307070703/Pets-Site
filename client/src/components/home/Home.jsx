@@ -13,7 +13,6 @@ export default function Home() {
         .then(result => setLatestPosts(result));
     }, []);
 
-    console.log(latestPosts);
     return(
         <Carousel>
             {latestPosts.map(post => <Carousel.Item key = {post._id}>< CarouselItem {...post}/></Carousel.Item>)}
