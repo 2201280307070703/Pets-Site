@@ -14,6 +14,8 @@
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 600;
+    color: lightpink;
+    text-decoration: none;
 }
 
 .editBtn{
@@ -25,6 +27,8 @@
     padding: 10px 30px;
     font-size: 18px;
     font-weight: 600;
+    color: lightgreen;
+    text-decoration: none;
 }
 
 .editBtn:hover{

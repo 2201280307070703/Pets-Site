@@ -23,3 +23,9 @@ export const getOne = async (postId) => {
 };
 
 export const remove = (postId) => request.remove(`${BASE_URL}/${postId}`);
+
+export const getAll = async () => {
+    const result = await request.get(BASE_URL);
+
+    return result;
+};
