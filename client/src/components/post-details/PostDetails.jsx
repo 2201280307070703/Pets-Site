@@ -1,27 +1,50 @@
+import styles from './PostDetails.module.css';
+
+import { useParams, Link } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import styles from './PostDetails.module.css';
+import * as postsService from '../../services/postService';
+import Path from '../../path';
+import { pathToUrl } from '../../utils/pathToUrl';
+
+import { useContext, useEffect, useState } from 'react';
+import AuthContext from '../../contexts/authContext';
 
 export default function PostDetails() {
+    const { postId }  = useParams();
+
+    const [post, setPost] = useState({});
+
+    useEffect(() => {
+        postsService.getOne(postId)
+        .then((post) => setPost(post));
+    }, [postId]);
+
+    const { _id } = useContext(AuthContext);
+
     return (
         <div className={styles.container}>
         <Card style={{ width: '26rem', background: 'lightcoral' }}>
-            <Card.Img variant="top" src="https://images.ctfassets.net/ub3bwfd53mwy/5WFv6lEUb1e6kWeP06CLXr/acd328417f24786af98b1750d90813de/4_Image.jpg?w=750" />
+            <Card.Img variant="top" src={post.imageUrl} />
             <Card.Body>
-                <Card.Title className={styles.name}>Card Title</Card.Title>
+                <Card.Title className={styles.name}>{post.name}</Card.Title>
                 <Card.Text className={styles.breed}>
-                    French Buldog
+                    {post.breed}
                 </Card.Text>
                 <Card.Text>
-                    Age: 2
+                    Age: {post.age}
                 </Card.Text>
                 <Card.Text className={styles.description}>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    {post.description}
                 </Card.Text>
-                <Button className={styles.deleteBtn}>Delete</Button>
-                <Button className={styles.editBtn}>Edit</Button>
+                {_id === post._ownerId && (
+                    <>
+                <Link to={pathToUrl(Path.PostDelete, {postId: post._id})} className={styles.deleteBtn}>Delete</Link>
+                <Link to={pathToUrl(Path.PostEdit, {postId: post._id})} className={styles.editBtn}>Edit</Link>
+                    </>
+                )}
             </Card.Body>
         </Card>
         </div>

@@ -16,6 +16,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PostDetails from './components/post-details/PostDetails';
 import PostEdit from './components/post-edit/PostEdit';
+import PostDelete from './components/post-delete/PostDelete';
 import Logout from './components/logout/Logout';
 
 function App() {
@@ -83,6 +84,7 @@ const values ={
           <Route path={Path.PostCreate} element = {<PostCreate/>}></Route>
           <Route path = {Path.PostDetails} element = {<PostDetails/>}></Route>
           <Route path={Path.PostEdit} element = {<PostEdit/>}></Route>
+          <Route path={Path.PostDelete} element = {<PostDelete/>}></Route>
           <Route path={Path.Login} element = {<Login/>}></Route>
           <Route path = {Path.Register} element = {<Register/>}></Route>
           <Route path = {Path.Logout} element = {<Logout/>}></Route>

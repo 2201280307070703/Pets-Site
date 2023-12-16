@@ -15,3 +15,9 @@ export const getLastThreePosts = async () => {
 
     return result;
 };
+
+export const getOne = async (postId) => {
+    const result = await request.get(`${BASE_URL}/${postId}`);
+
+    return result;
+};
