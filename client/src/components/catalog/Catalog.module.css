@@ -8,7 +8,7 @@
 }
 
 .cards{
-    display: flex;
+    background-color: red;
     margin: auto 0px;
     max-width: 80%;
 }
