@@ -16,7 +16,7 @@ const CreateFormKeys = {
 
 export default function PostCreate() {
     const navigate = useNavigate();
-    const createSubmitHandler = async (formValues) =>{
+    const createSubmitHandler = async (formValues) => {
         try{
             const result = await postService.create(formValues);
 

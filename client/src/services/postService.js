@@ -25,7 +25,15 @@ export const getOne = async (postId) => {
 export const remove = (postId) => request.remove(`${BASE_URL}/${postId}`);
 
 export const getAll = async () => {
+    const query = encodeURIComponent('?offset=10&pageSize=5');
+
     const result = await request.get(BASE_URL);
+
+    return result;
+};
+
+export const edit = async (postId, postData) => {
+    const result = await request.put(`${BASE_URL}/${postId}`, postData);
 
     return result;
 };
