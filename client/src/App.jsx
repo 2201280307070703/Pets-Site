@@ -18,6 +18,7 @@ import PostDetails from './components/post-details/PostDetails';
 import PostEdit from './components/post-edit/PostEdit';
 import PostDelete from './components/post-delete/PostDelete';
 import Logout from './components/logout/Logout';
+import Page404 from './components/error/Page404';
 
 function App() {
 const [auth, setAuth] = useState(() => {
@@ -88,6 +89,7 @@ const values ={
           <Route path={Path.Login} element = {<Login/>}></Route>
           <Route path = {Path.Register} element = {<Register/>}></Route>
           <Route path = {Path.Logout} element = {<Logout/>}></Route>
+          <Route path={Path.Page404} element ={<Page404 />}></Route>
       </Routes>
       <Footer />
     </>

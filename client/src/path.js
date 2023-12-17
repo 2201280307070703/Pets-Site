@@ -7,7 +7,8 @@ const Path = {
     PostDelete: '/posts/:postId/delete',
     Login: '/login',
     Register: '/register',
-    Logout: '/logout'
+    Logout: '/logout',
+    Page404: '*'
 };
 
 export default Path;
