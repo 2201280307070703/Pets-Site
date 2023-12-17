@@ -35,7 +35,7 @@ export default function PostDelete() {
                 <img className={styles.image} src={post.imageUrl} />
                 <div className={styles.buttons}>
                     <button onClick={deleteOnSubmitHandler} className={styles.deletelBtn}>Delete</button>
-                    <Link to={pathToUrl(Path.PostDetails, { postId: postId })} className={styles.detailsBtn}>Cancel</Link>
+                    <Link to={pathToUrl(Path.PostDetails, { postId: postId })} className={styles.cancelBtn}>Cancel</Link>
                 </div>
             </Card.Body>
         </Card>
