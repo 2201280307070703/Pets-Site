@@ -19,6 +19,7 @@ import PostEdit from './components/post-edit/PostEdit';
 import PostDelete from './components/post-delete/PostDelete';
 import Logout from './components/logout/Logout';
 import Page404 from './components/error/Page404';
+import AuthGuard from './components/guards/AuthGuard';
 
 function App() {
 const [auth, setAuth] = useState(() => {
@@ -94,14 +95,17 @@ const values ={
       < Routes>
           <Route path = {Path.Home} element = {<Home/>}></Route>
           <Route path={Path.Catalog} element = {<Catalog/>}></Route>
-          <Route path={Path.PostCreate} element = {<PostCreate/>}></Route>
           <Route path = {Path.PostDetails} element = {<PostDetails/>}></Route>
-          <Route path={Path.PostEdit} element = {<PostEdit/>}></Route>
-          <Route path={Path.PostDelete} element = {<PostDelete/>}></Route>
           <Route path={Path.Login} element = {<Login showLoginError={showLoginError}/>}></Route>
           <Route path = {Path.Register} element = {<Register showRegisterError={showRegisterError}/>}></Route>
-          <Route path = {Path.Logout} element = {<Logout/>}></Route>
           <Route path={Path.Page404} element ={<Page404 />}></Route>
+
+          <Route element={<AuthGuard />}>
+          <Route path={Path.PostCreate} element = {<PostCreate/>}></Route>
+              <Route path={Path.PostEdit} element = {<PostEdit/>}></Route>
+              <Route path={Path.PostDelete} element = {<PostDelete/>}></Route>
+              <Route path = {Path.Logout} element = {<Logout/>}></Route>
+          </Route>
       </Routes>
       <Footer />
     </>
