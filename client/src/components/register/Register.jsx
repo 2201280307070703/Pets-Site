@@ -13,11 +13,9 @@ const RegisterFormKeys = {
     ConfirmPassword: 'confirmPassword'
 };
 
-export default function Register({
-    showRegisterError
-}) {
+export default function Register() {
 
-    const {registerSubmitHandler} = useContext(AuthContext);
+    const {registerSubmitHandler, showRegisterError} = useContext(AuthContext);
 
     const {formValues, onChange, onSubmit} = useForm(registerSubmitHandler, {
         [RegisterFormKeys.Email]: '',

@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {Routes, Route, useNavigate} from 'react-router-dom';
-import { useState } from 'react';
+import {Routes, Route} from 'react-router-dom';
 
-import * as authService from './services/authService';
-import AuthContext from './contexts/authContext';
+
+import {AuthProvider} from './contexts/authContext';
 import Path from './path';
 
 import Footer from "./components/footer/Footer";
@@ -22,82 +21,82 @@ import Page404 from './components/error/Page404';
 import AuthGuard from './components/guards/AuthGuard';
 
 function App() {
-const [auth, setAuth] = useState(() => {
-    localStorage.removeItem('accessToken');
-    return {};
-});
+// const [auth, setAuth] = useState(() => {
+//     localStorage.removeItem('accessToken');
+//     return {};
+// });
 
-const [showRegisterError, setShowRegisterError] = useState('');
+// const [showRegisterError, setShowRegisterError] = useState('');
 
-const [showLoginError, setShowLoginError] = useState('');
+// const [showLoginError, setShowLoginError] = useState('');
 
-const navigate = useNavigate();
+// const navigate = useNavigate();
 
-const loginSubmitHandler = async ({email, password}) => {
-  try{
-    const result = await authService.login(email, password);
+// const loginSubmitHandler = async ({email, password}) => {
+//   try{
+//     const result = await authService.login(email, password);
 
-    setAuth({
-      accessToken: result.accessToken,
-      email: result.email,
-      _id: result._id
-    });
+//     setAuth({
+//       accessToken: result.accessToken,
+//       email: result.email,
+//       _id: result._id
+//     });
 
-    localStorage.setItem('accessToken', result.accessToken);
+//     localStorage.setItem('accessToken', result.accessToken);
 
-    navigate(Path.Home);
-  }catch(error){
-    setShowLoginError(error.message);
-  }
-};
+//     navigate(Path.Home);
+//   }catch(error){
+//     setShowLoginError(error.message);
+//   }
+// };
 
-const registerSubmitHandler = async ({email, password, confirmPassword}) => {
-  try{
-    if(password !== confirmPassword){
-        throw Error('Password missmatch!');
-    }
+// const registerSubmitHandler = async ({email, password, confirmPassword}) => {
+//   try{
+//     if(password !== confirmPassword){
+//         throw Error('Password missmatch!');
+//     }
 
-    const result = await authService.register(email, password);
+//     const result = await authService.register(email, password);
 
-    setAuth({
-      accessToken: result.accessToken,
-      email: result.email,
-      _id: result._id
-    });
+//     setAuth({
+//       accessToken: result.accessToken,
+//       email: result.email,
+//       _id: result._id
+//     });
 
-    localStorage.setItem('accessToken', result.accessToken);
+//     localStorage.setItem('accessToken', result.accessToken);
     
-    navigate(Path.Home);
-  }catch(error){
-    setShowRegisterError(error.message);
-  }
-};
+//     navigate(Path.Home);
+//   }catch(error){
+//     setShowRegisterError(error.message);
+//   }
+// };
 
-const logoutHandler = () => {
-    setAuth({});
+// const logoutHandler = () => {
+//     setAuth({});
 
-    localStorage.removeItem('accessToken');
-};
+//     localStorage.removeItem('accessToken');
+// };
 
-const values ={
-  loginSubmitHandler,
-  registerSubmitHandler,
-  logoutHandler,
-  email: auth.email,
-  _id: auth._id,
-  isAuthenticated: !!auth.accessToken
-};
+// const values ={
+//   loginSubmitHandler,
+//   registerSubmitHandler,
+//   logoutHandler,
+//   email: auth.email,
+//   _id: auth._id,
+//   isAuthenticated: !!auth.accessToken
+// };
 
   return (
-    <AuthContext.Provider value = {values}>
+    <AuthProvider>
     <>
       < Header />
       < Routes>
           <Route path = {Path.Home} element = {<Home/>}></Route>
           <Route path={Path.Catalog} element = {<Catalog/>}></Route>
           <Route path = {Path.PostDetails} element = {<PostDetails/>}></Route>
-          <Route path={Path.Login} element = {<Login showLoginError={showLoginError}/>}></Route>
-          <Route path = {Path.Register} element = {<Register showRegisterError={showRegisterError}/>}></Route>
+          <Route path={Path.Login} element = {<Login />}></Route>
+          <Route path = {Path.Register} element = {<Register />}></Route>
           <Route path={Path.Page404} element ={<Page404 />}></Route>
 
           <Route element={<AuthGuard />}>
@@ -109,7 +108,7 @@ const values ={
       </Routes>
       <Footer />
     </>
-    </AuthContext.Provider>
+    </AuthProvider>
   )
 }
 
