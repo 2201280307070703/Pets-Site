@@ -14,8 +14,15 @@ export default function Home() {
     }, []);
 
     return(
-        <Carousel>
-            {latestPosts.map(post => <Carousel.Item key = {post._id}>< CarouselItem {...post}/></Carousel.Item>)}
-        </Carousel>
+        <>
+            <Carousel>
+                {latestPosts.map(post => <Carousel.Item key={post._id}>< CarouselItem {...post} /></Carousel.Item>)}
+            </Carousel>
+            <div style={{ height: '83vh', background: 'lightseagreen', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <h1 style={{ fontSize: '64px', fontWeight: '800', color: '#ff6555' }}>
+                    No posts yet!
+                </h1>
+            </div>
+        </>
     );
-}
+};
