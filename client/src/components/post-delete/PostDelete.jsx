@@ -45,7 +45,7 @@ export default function PostDelete() {
                     <Link to={pathToUrl(Path.PostDetails, { postId: postId })} className={styles.cancelBtn}>Cancel</Link>
                 </div>
             </Card.Body>
-            {showError && <AlertItem type={'danger'} text={'Something went wrong!'}/>}
+            {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
         </Card>
     );
 };

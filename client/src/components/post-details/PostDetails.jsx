@@ -87,7 +87,7 @@ export default function PostDetails() {
                             ></textarea>
                             <button type="submit" className={styles.postBtn}>Post</button>
                         </form>
-                        {showError && <AlertItem type={'danger'} text={'Something went wrong!'}/>}
+                        {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
                     </div>
                 )}
             </Card>

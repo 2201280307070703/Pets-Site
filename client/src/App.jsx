@@ -25,9 +25,13 @@ const [auth, setAuth] = useState(() => {
     localStorage.removeItem('accessToken');
     return {};
 });
+
+const [showError, setShowError] = useState(false);
+
 const navigate = useNavigate();
 
 const loginSubmitHandler = async ({email, password}) => {
+  try{
     const result = await authService.login(email, password);
 
     setAuth({
@@ -39,10 +43,13 @@ const loginSubmitHandler = async ({email, password}) => {
     localStorage.setItem('accessToken', result.accessToken);
 
     navigate(Path.Home);
-
+  }catch(error){
+    setShowError(true);
+  }
 };
 
 const registerSubmitHandler = async ({email, password, confirmPassword}) => {
+  try{
     if(password !== confirmPassword){
       throw new Error('Password missmatch!');
     }
@@ -56,8 +63,11 @@ const registerSubmitHandler = async ({email, password, confirmPassword}) => {
     });
 
     localStorage.setItem('accessToken', result.accessToken);
-
+    
     navigate(Path.Home);
+  }catch(error){
+    setShowError(true);
+  }
 };
 
 const logoutHandler = () => {
@@ -70,6 +80,7 @@ const values ={
   loginSubmitHandler,
   registerSubmitHandler,
   logoutHandler,
+  showError,
   email: auth.email,
   _id: auth._id,
   isAuthenticated: !!auth.accessToken

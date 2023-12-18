@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as postService from '../../services/postService';
 import Path from '../../path';
 
+import AlertItem from '../alerts/AlertItem';
+
 export default function PostEdit() {
     const navigate = useNavigate();
 
@@ -19,6 +21,8 @@ export default function PostEdit() {
         description: ''
     });
 
+    const [showError, setShowError] = useState(false);
+
     useEffect(() => {
         postService.getOne(postId)
         .then(post => setPost(post))
@@ -28,11 +32,11 @@ export default function PostEdit() {
         e.preventDefault();
 
         try{
-            await postService.edit(postId, post);
-
+            //await postService.edit(postId, post);
+            throw Error();
             navigate(Path.Catalog);
         }catch(error){
-            console.log(error);
+            setShowError(true);
         }
     };
 
@@ -86,6 +90,7 @@ export default function PostEdit() {
             </div>
         </form>
     </section>
+    {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
     </div>
     );
 };

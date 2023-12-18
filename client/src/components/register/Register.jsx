@@ -5,6 +5,8 @@ import { useContext } from 'react';
 import AuthContext from '../../contexts/authContext';
 import useForm from '../../hooks/useForm';
 
+import AlertItem from '../alerts/AlertItem';
+
 const RegisterFormKeys = {
     Email: 'email',
     Password: 'password',
@@ -13,7 +15,7 @@ const RegisterFormKeys = {
 
 export default function Register() {
 
-    const {registerSubmitHandler} = useContext(AuthContext);
+    const {registerSubmitHandler, showError} = useContext(AuthContext);
 
     const {formValues, onChange, onSubmit} = useForm(registerSubmitHandler, {
         [RegisterFormKeys.Email]: '',
@@ -25,8 +27,8 @@ export default function Register() {
         <section className={styles.container}>
         <form className={styles.form} onSubmit={onSubmit}>
             <div className={styles.formContainer}>
+            {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
                 <h1 className={styles.header}>Register</h1>
-
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"

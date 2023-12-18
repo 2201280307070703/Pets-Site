@@ -5,13 +5,15 @@ import { useContext } from 'react';
 import useForm from '../../hooks/useForm';
 import authContext from '../../contexts/authContext';
 
+import AlertItem from '../alerts/AlertItem';
+
 const LoginFormKeys = {
     Email: 'email',
     Password: 'password'
 };
 
 export default function Login() {
-    const {loginSubmitHandler} = useContext(authContext);
+    const {loginSubmitHandler, showError} = useContext(authContext);
 
     const {formValues, onChange, onSubmit} = useForm(loginSubmitHandler, {
         [LoginFormKeys.Email]: '',
@@ -23,6 +25,7 @@ export default function Login() {
         <form className={styles.form} onSubmit={onSubmit}>
     
             <div className={styles.formContainer}>
+            {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
                 <h1 className={styles.header}>Login</h1>
 
                 <label htmlFor="email">Email:</label>

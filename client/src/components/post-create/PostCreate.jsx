@@ -90,7 +90,7 @@ export default function PostCreate() {
             </div>
         </form>
     </section>
-    {showError && <AlertItem type={'danger'} text={'Something went wrong!'}/>}
+    {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
     </div>
     );
 };
