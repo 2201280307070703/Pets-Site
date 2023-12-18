@@ -7,7 +7,7 @@ import AuthContext from '../../contexts/authContext';
 import Path from '../../path';
 
 export default function Header() {
-    const {email, isAuthenticated} = useContext(AuthContext);
+    const {isAuthenticated} = useContext(AuthContext);
 
     return(
         <header className={styles.header}>
@@ -15,17 +15,16 @@ export default function Header() {
             <nav className={styles.nav}>
                 {isAuthenticated && (
                     <>
-                    <Link to={Path.PostCreate} className={styles.link} >Add Post</Link>
-                    <Link to={Path.Logout} className={styles.link} >Logout</Link>
-                    {/* <p>{email}</p> */}
+                        <Link to={Path.PostCreate} className={styles.link} >Add Post</Link>
+                        <Link to={Path.Logout} className={styles.link} >Logout</Link>
                     </>
                 )}
                 <Link to={Path.Catalog} className={styles.link} >Catalog</Link>
 
                 {!isAuthenticated && (
                     <>
-                    <Link to={Path.Login} className={styles.link} >Login</Link>
-                    <Link to={Path.Register} className={styles.link} >Register</Link>
+                        <Link to={Path.Login} className={styles.link} >Login</Link>
+                        <Link to={Path.Register} className={styles.link} >Register</Link>
                     </>
                 )}
             </nav>

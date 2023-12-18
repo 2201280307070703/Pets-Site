@@ -6,6 +6,9 @@ import useForm from '../../hooks/useForm';
 import * as postService from '../../services/postService';
 import Path from '../../path';
 
+import AlertItem from '../alerts/AlertItem';
+import { useState } from 'react';
+
 const CreateFormKeys = {
     Name: 'name',
     Breed: 'breed',
@@ -16,13 +19,16 @@ const CreateFormKeys = {
 
 export default function PostCreate() {
     const navigate = useNavigate();
+
+    const [showError, setShowError] = useState(false);
+    
     const createSubmitHandler = async (formValues) => {
         try{
-            const result = await postService.create(formValues);
-
+           await postService.create(formValues);
+           
             navigate(Path.Home);
         }catch(error){
-            console.log(error);
+            setShowError(true);
         }
     };
 
@@ -84,6 +90,7 @@ export default function PostCreate() {
             </div>
         </form>
     </section>
+    {showError && <AlertItem type={'danger'} text={'Something went wrong!'}/>}
     </div>
     );
 };
