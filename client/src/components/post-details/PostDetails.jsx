@@ -8,10 +8,11 @@ import * as commentService from '../../services/commentService';
 import Path from '../../path';
 import { pathToUrl } from '../../utils/pathToUrl';
 import AuthContext from '../../contexts/authContext';
+import useForm from '../../hooks/useForm';
 
 import Card from 'react-bootstrap/Card';
 import CommentsItem from './commentsItem/CommentsItem';
-import useForm from '../../hooks/useForm';
+import AlertItem from '../alerts/AlertItem';
 
 export default function PostDetails() {
     const { postId }  = useParams();
@@ -19,6 +20,8 @@ export default function PostDetails() {
     const [post, setPost] = useState({});
 
     const [comments, setComments] = useState([]);
+
+    const [showError, setShowError] = useState(false);
 
     const { _id, isAuthenticated, email } = useContext(AuthContext);
 
@@ -31,13 +34,16 @@ export default function PostDetails() {
     }, [postId]);
 
     const commentSubmitHandler = async () => {
-        const newComment = await commentService.create(postId, formValues, email);
-
-
-        setComments(state => ([
-            ...state,
-            newComment,
-        ]));
+        try{
+            const newComment = await commentService.create(postId, formValues, email);
+            
+            setComments(state => ([
+                ...state,
+                newComment,
+            ]));
+        }catch(error){
+            setShowError(true);
+        }
 
         formValues.message = '';
 
@@ -81,6 +87,7 @@ export default function PostDetails() {
                             ></textarea>
                             <button type="submit" className={styles.postBtn}>Post</button>
                         </form>
+                        {showError && <AlertItem type={'danger'} text={'Something went wrong!'}/>}
                     </div>
                 )}
             </Card>
