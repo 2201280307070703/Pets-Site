@@ -26,7 +26,9 @@ const [auth, setAuth] = useState(() => {
     return {};
 });
 
-const [showError, setShowError] = useState(false);
+const [showRegisterError, setShowRegisterError] = useState('');
+
+const [showLoginError, setShowLoginError] = useState('');
 
 const navigate = useNavigate();
 
@@ -44,14 +46,14 @@ const loginSubmitHandler = async ({email, password}) => {
 
     navigate(Path.Home);
   }catch(error){
-    setShowError(true);
+    setShowLoginError(error.message);
   }
 };
 
 const registerSubmitHandler = async ({email, password, confirmPassword}) => {
   try{
     if(password !== confirmPassword){
-      throw new Error('Password missmatch!');
+        throw Error('Password missmatch!');
     }
 
     const result = await authService.register(email, password);
@@ -66,7 +68,7 @@ const registerSubmitHandler = async ({email, password, confirmPassword}) => {
     
     navigate(Path.Home);
   }catch(error){
-    setShowError(true);
+    setShowRegisterError(error.message);
   }
 };
 
@@ -80,7 +82,6 @@ const values ={
   loginSubmitHandler,
   registerSubmitHandler,
   logoutHandler,
-  showError,
   email: auth.email,
   _id: auth._id,
   isAuthenticated: !!auth.accessToken
@@ -97,8 +98,8 @@ const values ={
           <Route path = {Path.PostDetails} element = {<PostDetails/>}></Route>
           <Route path={Path.PostEdit} element = {<PostEdit/>}></Route>
           <Route path={Path.PostDelete} element = {<PostDelete/>}></Route>
-          <Route path={Path.Login} element = {<Login/>}></Route>
-          <Route path = {Path.Register} element = {<Register/>}></Route>
+          <Route path={Path.Login} element = {<Login showLoginError={showLoginError}/>}></Route>
+          <Route path = {Path.Register} element = {<Register showRegisterError={showRegisterError}/>}></Route>
           <Route path = {Path.Logout} element = {<Logout/>}></Route>
           <Route path={Path.Page404} element ={<Page404 />}></Route>
       </Routes>

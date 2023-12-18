@@ -13,9 +13,11 @@ const RegisterFormKeys = {
     ConfirmPassword: 'confirmPassword'
 };
 
-export default function Register() {
+export default function Register({
+    showRegisterError
+}) {
 
-    const {registerSubmitHandler, showError} = useContext(AuthContext);
+    const {registerSubmitHandler} = useContext(AuthContext);
 
     const {formValues, onChange, onSubmit} = useForm(registerSubmitHandler, {
         [RegisterFormKeys.Email]: '',
@@ -27,7 +29,7 @@ export default function Register() {
         <section className={styles.container}>
         <form className={styles.form} onSubmit={onSubmit}>
             <div className={styles.formContainer}>
-            {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
+            {showRegisterError && <AlertItem type={'danger'} text={`${showRegisterError}`}/>}
                 <h1 className={styles.header}>Register</h1>
                 <label htmlFor="email">Email:</label>
                 <input

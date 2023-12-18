@@ -20,15 +20,23 @@ const CreateFormKeys = {
 export default function PostCreate() {
     const navigate = useNavigate();
 
-    const [showError, setShowError] = useState(false);
+    const [showError, setShowError] = useState('');
     
     const createSubmitHandler = async (formValues) => {
         try{
+           if(formValues.name === '' || formValues.breed === ''  || formValues.age === ''  || formValues.imageUrl === ''  || formValues.description === '' ){
+            throw Error('Fill all inputs!');
+           }
+
            await postService.create(formValues);
 
             navigate(Path.Home);
         }catch(error){
-            setShowError(true);
+            if(error.message){
+                setShowError(error.message);
+            }else{
+                setShowError('Something went wrong! Please try again.');
+            }
         }
     };
 
@@ -90,7 +98,7 @@ export default function PostCreate() {
             </div>
         </form>
     </section>
-    {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
+    {showError && <AlertItem type={'danger'} text={`${showError}`}/>}
     </div>
     );
 };

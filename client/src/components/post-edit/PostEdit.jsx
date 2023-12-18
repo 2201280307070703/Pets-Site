@@ -21,7 +21,7 @@ export default function PostEdit() {
         description: ''
     });
 
-    const [showError, setShowError] = useState(false);
+    const [showError, setShowError] = useState('');
 
     useEffect(() => {
         postService.getOne(postId)
@@ -32,11 +32,18 @@ export default function PostEdit() {
         e.preventDefault();
 
         try{
-            //await postService.edit(postId, post);
-            throw Error();
+            if(post.name === '' || post.breed === ''  || post.age === ''  || post.imageUrl === ''  || post.description === '' ){
+                throw Error('Fill all inputs!');
+               }
+            await postService.edit(postId, post);
+
             navigate(Path.Catalog);
         }catch(error){
-            setShowError(true);
+            if(error.message){
+                setShowError(error.message);
+            }else{
+                setShowError('Something went wrong! Please try again.');
+            }
         }
     };
 
@@ -90,7 +97,7 @@ export default function PostEdit() {
             </div>
         </form>
     </section>
-    {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
+    {showError && <AlertItem type={'danger'} text={`${showError}`}/>}
     </div>
     );
 };

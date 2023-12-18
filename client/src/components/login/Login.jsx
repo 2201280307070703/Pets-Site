@@ -12,8 +12,10 @@ const LoginFormKeys = {
     Password: 'password'
 };
 
-export default function Login() {
-    const {loginSubmitHandler, showError} = useContext(authContext);
+export default function Login({
+    showLoginError
+}) {
+    const {loginSubmitHandler} = useContext(authContext);
 
     const {formValues, onChange, onSubmit} = useForm(loginSubmitHandler, {
         [LoginFormKeys.Email]: '',
@@ -25,7 +27,7 @@ export default function Login() {
         <form className={styles.form} onSubmit={onSubmit}>
     
             <div className={styles.formContainer}>
-            {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
+            {showLoginError && <AlertItem type={'danger'} text={`${showLoginError}`}/>}
                 <h1 className={styles.header}>Login</h1>
 
                 <label htmlFor="email">Email:</label>

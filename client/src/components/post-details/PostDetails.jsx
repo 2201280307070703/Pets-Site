@@ -35,6 +35,9 @@ export default function PostDetails() {
 
     const commentSubmitHandler = async () => {
         try{
+            if(formValues.message === ''){
+                throw Error('You can not send an empty message!');
+            }
             const newComment = await commentService.create(postId, formValues, email);
             
             setComments(state => ([
@@ -42,7 +45,11 @@ export default function PostDetails() {
                 newComment,
             ]));
         }catch(error){
-            setShowError(true);
+            if(error.message){
+                setShowError(error.message);
+            }else{
+                setShowError('Something went wrong! Please try again.');
+            }
         }
 
         formValues.message = '';
@@ -87,7 +94,7 @@ export default function PostDetails() {
                             ></textarea>
                             <button type="submit" className={styles.postBtn}>Post</button>
                         </form>
-                        {showError && <AlertItem type={'danger'} text={'Something went wrong! Please try again.'}/>}
+                        {showError && <AlertItem type={'danger'} text={`${showError}`}/>}
                     </div>
                 )}
             </Card>
