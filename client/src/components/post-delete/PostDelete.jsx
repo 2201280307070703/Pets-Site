@@ -9,10 +9,14 @@ import * as postsService from '../../services/postService';
 import Path from '../../path';
 import { pathToUrl } from '../../utils/pathToUrl'
 
+import AlertItem from '../alerts/AlertItem';
+
 export default function PostDelete() {
     const { postId } = useParams();
 
     const [post, setPost] = useState({});
+
+    const [showError, setShowError] = useState(false);
 
 
     useEffect(() => {postsService.getOne(postId)
@@ -23,10 +27,13 @@ export default function PostDelete() {
 
     const deleteOnSubmitHandler = async (e) => {
         e.preventDefault();
-
-        await postsService.remove(postId);
-
-        navigate(Path.Catalog);
+        try{
+            await postsService.remove(postId);
+            
+            navigate(Path.Catalog);
+        }catch(error){
+            setShowError(true);
+        }
     }
     return(
         <Card className={styles.container}>
@@ -38,6 +45,7 @@ export default function PostDelete() {
                     <Link to={pathToUrl(Path.PostDetails, { postId: postId })} className={styles.cancelBtn}>Cancel</Link>
                 </div>
             </Card.Body>
+            {showError && <AlertItem type={'danger'} text={'Something went wrong!'}/>}
         </Card>
     );
 };
