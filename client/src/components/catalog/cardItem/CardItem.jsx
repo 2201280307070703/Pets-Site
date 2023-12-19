@@ -12,7 +12,7 @@ export default function CartItem({
     description
 }) {
     return(
-        <Card style={{ width: '20rem', height: '20rem' }}>
+        <Card style={{ width: '20rem', height: '22rem' }}>
             <Card.Img variant="top" style={{width: '20rem', height: '12rem'}} src={imageUrl} />
             <Card.Body style={{ alignItems: 'center' }}>
                 <Card.Title>{name}</Card.Title>

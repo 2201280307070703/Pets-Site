@@ -12,8 +12,7 @@ export default function Logout() {
     const {logoutHandler} = useContext(AuthContext);
 
     useEffect(() => {authService.logout()
-    .then(() => logoutHandler(),
-    navigate(Path.Home))
+    .then(() => logoutHandler())
     .catch(() => navigate(Path.Home))
 }, []);
 

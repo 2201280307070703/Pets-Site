@@ -1,9 +1,11 @@
 import styles from './Register.module.css';
 
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import AuthContext from '../../contexts/authContext';
 import useForm from '../../hooks/useForm';
+import Path from '../../path';
 
 import AlertItem from '../alerts/AlertItem';
 
@@ -59,7 +61,7 @@ export default function Register() {
                 <input className={styles.submitBtn} type="submit" value="Register" />
 
                 <p className={styles.link}>
-                    <span>If you already have profile click <a href="#">here</a></span>
+                    <span>If you already have profile click <Link to={Path.Login}>here</Link></span>
                 </p>
             </div>
         </form>
